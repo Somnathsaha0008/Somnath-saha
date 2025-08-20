@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { generateTrafficForecast } from '../services/geminiService';
-import type { TrafficForecast } from '../types';
+import type { TrafficForecast, ForecastHotspot } from '../types';
 import Loader from './icons/Loader';
-import { AlertIcon, ClockIcon } from './icons/MetricIcons';
 
 const Forecast: React.FC = () => {
     const [query, setQuery] = useState('');
@@ -12,6 +11,7 @@ const Forecast: React.FC = () => {
 
     const handleGenerateForecast = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!query.trim()) return;
         setIsLoading(true);
         setError(null);
         setForecast(null);
@@ -25,19 +25,17 @@ const Forecast: React.FC = () => {
         }
     }, [query]);
 
-    const getCongestionInfo = (level: 'High' | 'Medium' | 'Low') => {
+    const getCongestionBadgeColor = (level: ForecastHotspot['predictedCongestion']) => {
         switch (level) {
-            case 'High': return { color: 'text-red-400', label: 'High Congestion' };
-            case 'Medium': return { color: 'text-yellow-400', label: 'Medium Congestion' };
-            case 'Low': return { color: 'text-green-400', label: 'Low Congestion' };
-            default: return { color: 'text-gray-400', label: 'Unknown' };
+            case 'High': return 'bg-red-500/80 text-red-100 border-red-500';
+            case 'Medium': return 'bg-yellow-500/80 text-yellow-100 border-yellow-500';
+            case 'Low': return 'bg-green-500/80 text-green-100 border-green-500';
+            default: return 'bg-gray-500/80 text-gray-100 border-gray-500';
         }
     };
 
-    const congestionInfo = forecast ? getCongestionInfo(forecast.expectedCongestion) : null;
-
     return (
-        <div className="bg-gray-900 p-6 rounded-lg shadow-lg mt-8">
+        <div>
             <h3 className="text-lg font-semibold text-white mb-4">Future Forecast</h3>
             <p className="text-gray-400 mb-4">Want to plan ahead? Ask our AI for a traffic forecast.</p>
             <form onSubmit={handleGenerateForecast} className="flex flex-col sm:flex-row gap-3">
@@ -45,7 +43,7 @@ const Forecast: React.FC = () => {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="e.g., Tomorrow at 9 AM, Friday evening..."
+                    placeholder="e.g., Tomorrow at 9 AM..."
                     className="flex-grow bg-gray-800 border border-gray-700 text-white rounded-md px-4 py-2 focus:ring-2 focus:ring-brand-green focus:outline-none"
                     aria-label="Time for traffic forecast"
                     required
@@ -73,21 +71,45 @@ const Forecast: React.FC = () => {
             )}
 
             {forecast && (
-                <div className="mt-6 p-4 bg-gray-800/50 border border-gray-700 rounded-lg animate-fade-in-up">
-                    <h4 className="font-bold text-brand-green-light">Forecast for: {forecast.forecastTime}</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3 text-sm">
-                        <div className="flex items-center gap-2">
-                           <AlertIcon />
-                            <span className="text-gray-400">Expected Congestion:</span>
-                            <span className={`font-semibold ${congestionInfo?.color}`}>{congestionInfo?.label}</span>
-                        </div>
-                         <div className="flex items-center gap-2">
-                            <ClockIcon />
-                            <span className="text-gray-400">Travel Time Impact:</span>
-                            <span className="font-semibold text-gray-200">{forecast.travelTimeImpact}</span>
-                        </div>
+                <div className="mt-6 p-4 bg-black/20 border border-gray-700 rounded-lg animate-fade-in-up">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
+                        <h4 className="font-bold text-brand-green-light">Forecast for: {forecast.forecastTime}</h4>
+                        <span className="text-xs font-semibold text-gray-300 bg-gray-700/50 px-3 py-1 rounded-full self-start sm:self-center">
+                            {forecast.overallTrend}
+                        </span>
                     </div>
-                    <p className="text-gray-300 mt-4 text-sm">{forecast.summary}</p>
+
+                    <p className="text-gray-300 mt-2 mb-4 text-sm">{forecast.summary}</p>
+
+                    <div className="space-y-3">
+                        <h5 className="text-md font-semibold text-gray-200">Predicted Hotspots:</h5>
+                        <ul className="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                            {forecast.hotspots.map((hotspot, index) => (
+                                <li key={index} className="p-3 bg-gray-900/50 rounded-md text-sm">
+                                    <div className="flex items-start justify-between">
+                                        <span className="font-semibold text-gray-300 pr-2">{hotspot.location}</span>
+                                        <span className={`flex-shrink-0 text-xs font-semibold px-2 py-1 rounded-full ${getCongestionBadgeColor(hotspot.predictedCongestion)}`}>
+                                            {hotspot.predictedCongestion}
+                                        </span>
+                                    </div>
+                                    <p className="text-gray-400 mt-1">
+                                        <span className="font-medium text-gray-500">Reason:</span> {hotspot.reason}
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    
+                    <div className="mt-4 pt-3 border-t border-gray-700">
+                         <h6 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Influential Data Sources</h6>
+                         <div className="flex flex-wrap gap-2 mt-2">
+                            {forecast.dataSources.map((source, index) => (
+                                <span key={index} className="text-xs text-brand-green-light bg-brand-green/10 px-2 py-1 rounded">
+                                    {source}
+                                </span>
+                            ))}
+                         </div>
+                    </div>
                 </div>
             )}
         </div>

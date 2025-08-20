@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { ClockIcon, LeafIcon, SmileIcon, ShieldIcon } from './icons/BenefitIcons';
 
@@ -10,7 +11,7 @@ interface BenefitCardProps {
 }
 
 const BenefitCard: React.FC<BenefitCardProps> = ({ icon, title, description, delay }) => (
-  <div className="bg-gray-900 p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300 animate-fade-in-up" style={{ animationDelay: delay }}>
+  <div className="bg-gray-900 p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300 animate-fade-in-up border border-gray-800 hover:border-brand-green/30" style={{ animationDelay: delay }}>
     <div className="text-brand-green mb-4">{icon}</div>
     <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
     <p className="text-gray-400">{description}</p>
@@ -47,7 +48,7 @@ const Benefits: React.FC = () => {
           <BenefitCard
             icon={<ShieldIcon />}
             title="Improved Safety"
-            description="Optimized flow reduces the chances of accidents at congested intersections."
+            description="Creates clear paths for emergency vehicles and optimizes flow to reduce intersection accidents."
             delay="0.4s"
           />
         </div>

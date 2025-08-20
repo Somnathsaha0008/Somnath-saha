@@ -26,3 +26,10 @@ export const SyncIcon: React.FC = () => (
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
     </svg>
 );
+
+export const SirenIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.5 5.5l1.5 1.5M19 5.5l-1.5 1.5M12 3V1.5M12 21v1.5M5.5 19l1.5-1.5M17 19l1.5 1.5" />
+    </svg>
+);

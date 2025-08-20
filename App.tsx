@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="bg-brand-dark min-h-screen font-sans text-brand-light">
+    <div className="bg-brand-dark bg-aurora bg-no-repeat min-h-screen font-sans text-brand-light">
       <Header />
       <main>
         <Hero />
