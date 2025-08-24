@@ -1,7 +1,6 @@
 
-
 import React from 'react';
-import { ClockIcon, LeafIcon, SmileIcon, ShieldIcon } from './icons/BenefitIcons';
+import { ClockIcon, LeafIcon, CommerceIcon, ShieldIcon } from './icons/BenefitIcons';
 
 interface BenefitCardProps {
   icon: React.ReactNode;
@@ -40,9 +39,9 @@ const Benefits: React.FC = () => {
             delay="0.2s"
           />
           <BenefitCard
-            icon={<SmileIcon />}
-            title="Reduced Stress"
-            description="A smoother, more predictable journey improves driver experience and reduces road rage."
+            icon={<CommerceIcon />}
+            title="Economic Boost"
+            description="By providing green waves and smart shortcut routes, we ensure faster, more reliable deliveries for quick commerce fleets, strengthening the local economy."
             delay="0.3s"
           />
           <BenefitCard

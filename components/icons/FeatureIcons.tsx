@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const iconClass = "w-12 h-12";
@@ -31,5 +30,13 @@ export const SirenIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.5 5.5l1.5 1.5M19 5.5l-1.5 1.5M12 3V1.5M12 21v1.5M5.5 19l1.5-1.5M17 19l1.5 1.5" />
+    </svg>
+);
+
+export const LogisticsIcon: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 17H6V6h11v4l4 4v2h-4v-2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 17H4a2 2 0 01-2-2V6a2 2 0 012-2h1" />
     </svg>
 );

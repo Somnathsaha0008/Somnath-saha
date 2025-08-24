@@ -1,3 +1,4 @@
+
 export interface TrafficMetrics {
   avgWaitTimeBefore: number;
   avgWaitTimeAfter: number;
@@ -63,4 +64,22 @@ export interface EmergencyScenario {
     vehicleType: 'Ambulance' | 'Fire Truck' | 'Police Cruiser';
     location: string;
     destination: string;
+}
+
+export interface LogisticsSummary {
+  title: string;
+  description: string;
+}
+
+export interface LogisticsMetrics {
+  deliveryTimeImprovement: number; // percentage
+  impactOnGeneralTraffic: number; // percentage
+  prioritizedCorridor: string;
+}
+
+export interface LogisticsReport {
+  summary: LogisticsSummary;
+  metrics: LogisticsMetrics;
+  activeFleets: { name: string; vehicleCount: number }[];
+  routeSuggestion?: RouteSuggestion;
 }

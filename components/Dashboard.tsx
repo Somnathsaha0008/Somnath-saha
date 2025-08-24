@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { generateTrafficReport } from '../services/geminiService';
@@ -12,6 +11,7 @@ import Panel from './Panel';
 import CustomChartTooltip from './CustomChartTooltip';
 import EmergencyPreemption from './EmergencyPreemption';
 import LiveTrafficFeed from './LiveTrafficFeed';
+import LogisticsOptimization from './LogisticsOptimization';
 
 const StatCard: React.FC<{ icon: React.ReactNode; label: string; value: number; unit: string; }> = ({ icon, label, value, unit }) => {
   const animatedValue = useCountUp(value, 1500);
@@ -191,11 +191,15 @@ const Dashboard: React.FC = () => {
                 </ul>
               </Panel>
             
-              <Panel className="lg:col-span-6">
+              <Panel className="lg:col-span-7">
+                <RouteOptimizer />
+              </Panel>
+              <Panel className="lg:col-span-5">
                 <Forecast />
               </Panel>
-              <Panel className="lg:col-span-6">
-                <RouteOptimizer />
+              
+              <Panel className="lg:col-span-12">
+                <LogisticsOptimization />
               </Panel>
 
               <Panel className="lg:col-span-12">

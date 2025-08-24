@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const Hero: React.FC = () => {
@@ -22,7 +23,7 @@ const Hero: React.FC = () => {
           Unclogging Bangalore's Arteries
         </h2>
         <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in-up mb-8" style={{ animationDelay: '0.2s' }}>
-          GreenWave AI transforms urban mobility by dynamically optimizing traffic signals, creating seamless green corridors to reduce congestion and emissions.
+          GreenWave AI transforms urban mobility by optimizing signals, creating clear paths for emergency vehicles, and providing intelligent shortcut routes for commerce fleets.
         </p>
          <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <a

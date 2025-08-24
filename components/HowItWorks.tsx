@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { DataIcon, AnalysisIcon, SignalIcon, SyncIcon, SirenIcon } from './icons/FeatureIcons';
+import { DataIcon, AnalysisIcon, SignalIcon, SyncIcon, SirenIcon, LogisticsIcon } from './icons/FeatureIcons';
 
 interface StepCardProps {
   icon: React.ReactNode;
@@ -23,13 +23,13 @@ const HowItWorks: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-white">How It Works</h2>
-          <p className="text-gray-400 mt-2">A five-step process for a smarter, safer city.</p>
+          <p className="text-gray-400 mt-2">A six-step process for a smarter, safer, and more efficient city.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <StepCard
             icon={<DataIcon />}
             title="1. Real-Time Data"
-            description="Collects live traffic data from IoT sensors and cameras across the city."
+            description="Collects live traffic data from IoT sensors, cameras, and connected vehicles."
             delay="0.1s"
           />
           <StepCard
@@ -50,11 +50,17 @@ const HowItWorks: React.FC = () => {
             description="Creates synchronized 'green waves' across major corridors for smooth transit."
             delay="0.4s"
           />
+           <StepCard
+            icon={<LogisticsIcon />}
+            title="5. Logistics Priority"
+            description="Generates 'green waves' and smart shortcut routes for quick commerce fleets, analyzing real-time sensor data to ensure the fastest possible deliveries."
+            delay="0.5s"
+          />
           <StepCard
             icon={<SirenIcon />}
-            title="5. Emergency Priority"
+            title="6. Emergency Priority"
             description="Detects emergency vehicles and overrides signals to create an immediate clear path."
-            delay="0.5s"
+            delay="0.6s"
           />
         </div>
       </div>
